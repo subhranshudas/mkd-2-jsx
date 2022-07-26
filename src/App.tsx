@@ -134,6 +134,7 @@ function App() {
             <p>This text is bold italic ***really important***.</p>
             <p>My favorite search engine is [Duck Duck Go](https://duckduckgo.com).</p>
             <p>{`<EPNSText color="orange">Hello World</EPNSText>`}</p>
+            <p>{`<Timestamp>3647484884</Timestamp>`}</p>
           </div>
         </Column>
       </Group>
