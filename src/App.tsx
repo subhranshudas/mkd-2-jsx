@@ -34,6 +34,10 @@ const StyledApp = styled.div`
       width: 200px;
     }
   }
+
+  & .examples p {
+    margin: 0 1px;
+  }
 `;
 
 const Group = styled.div`
@@ -82,7 +86,7 @@ function App() {
         <Column>
           <h3 className='standard'>OLD Epns standard</h3>
 
-          <div>
+          <div className='examples'>
             <p>[u:hello world]</p>
             <p>[ub:hello world]</p>
             <p>[ut:hello world]</p>
@@ -122,7 +126,7 @@ function App() {
         <Column>
           <h3 className='standard'>NEW Epns standard</h3>
           <a className='link' href='https://www.markdownguide.org/basic-syntax/' target="_blank" rel="noreferrer">https://www.markdownguide.org/basic-syntax/</a>
-          <div>
+          <div className='examples'>
             <p># Heading level 1</p>
             <p>## Heading level 2</p>
             <p>### Heading level 3</p>
