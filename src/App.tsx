@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { EPNSTextParser } from './EPNSTextParser'
+import { extractTimeStamp } from './EPNSTextParser';
+
 
 function App() {
+  const [markdownText, setMarkDownText] = useState('');
+  const [sourceText, setSourceText] = useState('');
+
+  const { timeStamp, notificationBody } = extractTimeStamp(sourceText);
+
+  const convertMarkDown = () => {
+    setSourceText(markdownText);
+  };
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p>Enter your Markdown</p>
+
+      <div>
+        <textarea rows={10} cols={180} value={markdownText} onChange={(e) => setMarkDownText(e.target.value)}></textarea>
+      </div>
+      
+      <button onClick={convertMarkDown}>Render</button>
+
+      <div style={{ margin: 20, border: '2px solid black', padding: '10px' }}>
+        <EPNSTextParser text={notificationBody} />
+      </div>
+      <p><b>TIMESTAMP:</b> {timeStamp}</p>
     </div>
   );
 }
