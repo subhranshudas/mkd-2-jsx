@@ -31,8 +31,8 @@ export const transformPatternsToTags = (contentText: string) : string => {
  */
 const processors = [
     transformPatternsToTags,
-    transformNewLine,
-    transformWhiteSpace
+    // transformNewLine,
+    // transformWhiteSpace
 ];
 
 export const preProcessMarkdownText = (contentText: string) : string => {
