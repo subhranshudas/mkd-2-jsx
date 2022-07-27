@@ -38,7 +38,7 @@ const StyledApp = styled.div`
   & .examples p {
     margin: 0 1px;
   }
-  &. instruction {
+  & .instruction {
     text-align: center;
   }
 `;
