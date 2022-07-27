@@ -38,6 +38,9 @@ const StyledApp = styled.div`
   & .examples p {
     margin: 0 1px;
   }
+  &. instruction {
+    text-align: center;
+  }
 `;
 
 const Group = styled.div`
@@ -81,7 +84,7 @@ function App() {
   return (
     <StyledApp>
       <h1 className='pageHeader'>Markdown PoC</h1>
-      <p>Copy paste or add 1 type of standard and test. (use ONLY either NOT both at a time!)</p>
+      <p className='instruction'>Copy paste or add 1 type of standard and test. (use ONLY either NOT both at a time!)</p>
 
       <Group>
         <Column>
