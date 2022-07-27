@@ -81,6 +81,7 @@ function App() {
   return (
     <StyledApp>
       <h1 className='pageHeader'>Markdown PoC</h1>
+      <p>Copy paste or add 1 type of standard and test. (use ONLY either NOT both at a time!)</p>
 
       <Group>
         <Column>
