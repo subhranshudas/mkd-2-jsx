@@ -6,7 +6,7 @@ export interface IEPNSTextParser {
   }
   
 export  const EPNSTextParser = (props: IEPNSTextParser) : JSX.Element => {
-  const textProp = preProcessMarkdownText(props?.text)
+  let textProp = preProcessMarkdownText(props?.text);
   return <EPNSMarkdown text={textProp} />;
 };
  

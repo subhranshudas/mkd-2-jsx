@@ -80,7 +80,6 @@ function App() {
     setSourceText(markdownText);
   };
 
-
   return (
     <StyledApp>
       <h1 className='pageHeader'>Markdown PoC</h1>

@@ -8,7 +8,7 @@ import { styles } from '../palette';
     children: any;
   };
 
-const TextU = (props: legacyTagProps) => {
+const EPNSTextU = (props: legacyTagProps) => {
     return (
         <span style={{
         ...styles.primary,
@@ -22,7 +22,7 @@ const TextU = (props: legacyTagProps) => {
     )
 };
 
-const TextUB = (props: legacyTagProps) => {
+const EPNSTextUB = (props: legacyTagProps) => {
     return (
         <span style={{
             ...styles.secondary,
@@ -36,7 +36,7 @@ const TextUB = (props: legacyTagProps) => {
     );
 };
 
-const TextUT = (props: legacyTagProps) => {
+const EPNSTextUT = (props: legacyTagProps) => {
     return (
         <span style={{
             ...styles.third,
@@ -50,7 +50,7 @@ const TextUT = (props: legacyTagProps) => {
     );
 };
 
-const TextUP = (props: legacyTagProps) => {
+const EPNSTextUP = (props: legacyTagProps) => {
     return (
         <span style={{
             ...styles.primary,
@@ -63,7 +63,7 @@ const TextUP = (props: legacyTagProps) => {
     );
 };
 
-const TextD = (props: legacyTagProps) => {
+const EPNSTextD = (props: legacyTagProps) => {
     return (
         <span style={{
             ...styles.primary,
@@ -74,7 +74,7 @@ const TextD = (props: legacyTagProps) => {
     );
 };
 
-const TextS = (props: legacyTagProps) => {
+const EPNSTextS = (props: legacyTagProps) => {
     return (
         <span style={{
             ...styles.secondary,
@@ -85,7 +85,7 @@ const TextS = (props: legacyTagProps) => {
     );
 };
 
-const TextT = (props: legacyTagProps) => {
+const EPNSTextT = (props: legacyTagProps) => {
     return (
         <span style={{
             ...styles.third,
@@ -96,7 +96,7 @@ const TextT = (props: legacyTagProps) => {
     );
 };
 
-const TextE = (props: legacyTagProps) => {
+const EPNSTextE = (props: legacyTagProps) => {
     return (
         <span style={{
             ...styles.error,
@@ -107,7 +107,7 @@ const TextE = (props: legacyTagProps) => {
     );
 };
 
-const TextB = (props: legacyTagProps) => {
+const EPNSTextB = (props: legacyTagProps) => {
     return (
         <span style={{
             ...styles.bold
@@ -117,7 +117,7 @@ const TextB = (props: legacyTagProps) => {
     );
 };
 
-const TextI = (props: legacyTagProps) => {
+const EPNSTextI = (props: legacyTagProps) => {
     return (
         <span style={{
             ...styles.italics
@@ -127,7 +127,7 @@ const TextI = (props: legacyTagProps) => {
     );
 };
 
-const TextBI = (props: legacyTagProps) => {
+const EPNSTextBI = (props: legacyTagProps) => {
     return (
         <span style={{
             ...styles.bold,
@@ -138,7 +138,7 @@ const TextBI = (props: legacyTagProps) => {
     );
 };
 
-const TextW = (props: legacyTagProps) => {
+const EPNSTextW = (props: legacyTagProps) => {
     return (
         <span style={{
             ...styles.white,
@@ -149,7 +149,7 @@ const TextW = (props: legacyTagProps) => {
     );
 };
 
-const TextMG = (props: legacyTagProps) => {
+const EPNSTextMG = (props: legacyTagProps) => {
     return (
         <span style={{
             ...styles.midgray
@@ -159,7 +159,7 @@ const TextMG = (props: legacyTagProps) => {
     );
 };
 
-const TextWB = (props: legacyTagProps) => {
+const EPNSTextWB = (props: legacyTagProps) => {
     return (
         <span style={{
             ...styles.white
@@ -169,7 +169,7 @@ const TextWB = (props: legacyTagProps) => {
     );
 };
 
-const TextDG = (props: legacyTagProps) => {
+const EPNSTextDG = (props: legacyTagProps) => {
     return (
         <span style={{
             ...styles.darkgray
@@ -179,7 +179,7 @@ const TextDG = (props: legacyTagProps) => {
     );
 };
 
-const TextDDG = (props: legacyTagProps) => {
+const EPNSTextDDG = (props: legacyTagProps) => {
     return (
         <span style={{
             ...styles.darkergray
@@ -190,52 +190,52 @@ const TextDDG = (props: legacyTagProps) => {
 };
 
 export const V1_OVERRIDES = {
-    TextU: {
-        component: TextU
+    EPNSTextU: {
+        component: EPNSTextU
     },
-    TextUB: {
-      component: TextUB
+    EPNSTextUB: {
+      component: EPNSTextUB
     },
-    TextUT: {
-      component: TextUT
+    EPNSTextUT: {
+      component: EPNSTextUT
     },
-    TextUP: {
-      component: TextUP
+    EPNSTextUP: {
+      component: EPNSTextUP
     },
-    TextD: {
-      component: TextD
+    EPNSTextD: {
+      component: EPNSTextD
     },
-    TextS: {
-      component: TextS
+    EPNSTextS: {
+      component: EPNSTextS
     },
-    TextT: {
-      component: TextT
+    EPNSTextT: {
+      component: EPNSTextT
     },
-    TextE: {
-      component: TextE
+    EPNSTextE: {
+      component: EPNSTextE
     },
-    TextB: {
-      component: TextB
+    EPNSTextB: {
+      component: EPNSTextB
     },
-    TextI: {
-      component: TextI
+    EPNSTextI: {
+      component: EPNSTextI
     },
-    TextBI: {
-        component: TextBI
+    EPNSTextBI: {
+        component: EPNSTextBI
     },
-    TextW: {
-      component: TextW
+    EPNSTextW: {
+      component: EPNSTextW
     },
-    TextWB: {
-      component: TextWB
+    EPNSTextWB: {
+      component: EPNSTextWB
     },
-    TextMG: {
-      component: TextMG
+    EPNSTextMG: {
+      component: EPNSTextMG
     },
-    TextDG: {
-      component: TextDG
+    EPNSTextDG: {
+      component: EPNSTextDG
     },
-    TextDDG: {
-      component: TextDDG
+    EPNSTextDDG: {
+      component: EPNSTextDDG
     },
 };

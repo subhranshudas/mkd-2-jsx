@@ -1,42 +1,31 @@
-import { V1_PATTERNS } from './patterns';
-
-const TimestampPatterns = {
-  V1: {
-      matcherRegex: /\[timestamp:(.*?)\]/mg,
-      replacerRegex: /\[timestamp:(.*?)\]/mg
-  },
-  V2: {
-      matcherRegex: /<Timestamp>(.*?)<\/Timestamp>/mg,
-      replacerRegex: /<Timestamp>(.*?)<\/Timestamp>/mg
-  }
-};
+import { V1_PATTERNS, EPNSTimestampPATTERN } from './patterns';
 
 export function extractTimeStamp(contentText: string): {
-notificationBody: string;
-timeStamp: string;
+  notificationBody: string;
+  timeStamp: string;
 } {
-let parsedBody = {
-  notificationBody: contentText,
-  timeStamp: '',
-};
+  let parsedBody = {
+    notificationBody: contentText,
+    timeStamp: '',
+  };
 
- const matchesV1TimestampTag =  TimestampPatterns.V1.matcherRegex.exec(contentText);
- 
+  const matchesV1TimestampTag =  EPNSTimestampPATTERN.V1.exec(contentText);
+  
 
-if (matchesV1TimestampTag) {
-  parsedBody.timeStamp = matchesV1TimestampTag[1];
-  parsedBody.notificationBody = contentText.replace(TimestampPatterns.V1.replacerRegex, '');;
-}
+  if (matchesV1TimestampTag) {
+    parsedBody.timeStamp = matchesV1TimestampTag[1];
+    parsedBody.notificationBody = contentText.replace(EPNSTimestampPATTERN.V1, '');
+  }
 
 
-const matchesV2TimestampTag =  TimestampPatterns.V2.matcherRegex.exec(contentText)
+  const matchesV2TimestampTag =  EPNSTimestampPATTERN.V2.exec(contentText)
 
-if (matchesV2TimestampTag) {
-  parsedBody.timeStamp = matchesV2TimestampTag[1];
-  parsedBody.notificationBody = contentText.replace(TimestampPatterns.V2.replacerRegex, '');;
-}
+  if (matchesV2TimestampTag) {
+    parsedBody.timeStamp = matchesV2TimestampTag[1];
+    parsedBody.notificationBody = contentText.replace(EPNSTimestampPATTERN.V2, '');
+  }
 
-return parsedBody;
+  return parsedBody;
 }
 
 const v1Patterns = V1_PATTERNS.map((_patterns) => {

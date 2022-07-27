@@ -8,67 +8,67 @@
 export const V1_PATTERNS = [
     {
         regExpPattern:   /\[(u):([^\]]+)\]/g, // url,
-        replacementTag: 'TextU'
+        replacementTag: 'EPNSTextU'
     },
     {
         regExpPattern: /\[(ub):([^\]]+)\]/g, // url
-        replacementTag: 'TextUB'
+        replacementTag: 'EPNSTextUB'
     },
     {
         regExpPattern: /\[(ut):([^\]]+)\]/g, // url
-        replacementTag: 'TextUT'
+        replacementTag: 'EPNSTextUT'
     },
     {
         regExpPattern: /\[(up):([^\]]+)\]/g, // url
-        replacementTag: 'TextUP'
+        replacementTag: 'EPNSTextUP'
     },
     {
         regExpPattern: /\[(d):([^\]]+)\]/g, // default or primary gradient color
-        replacementTag: 'TextD'
+        replacementTag: 'EPNSTextD'
     },
     {
         regExpPattern: /\[(s):([^\]]+)\]/g, // secondary gradient color
-        replacementTag: 'TextS'
+        replacementTag: 'EPNSTextS'
     },
     {
         regExpPattern: /\[(t):([^\]]+)\]/g, // third gradient color
-        replacementTag: 'TextT'
+        replacementTag: 'EPNSTextT'
     },
     {
         regExpPattern: /\[(e):([^\]]+)\]/g, // error
-        replacementTag: 'TextE'
+        replacementTag: 'EPNSTextE'
     },
     {
         regExpPattern: /\[(b):([^\]]+)\]/g, // bold
-        replacementTag: 'TextB'
+        replacementTag: 'EPNSTextB'
     },
     {
         regExpPattern: /\[(i):([^\]]+)\]/g, // italics
-        replacementTag: 'TextI'
+        replacementTag: 'EPNSTextI'
     },
     {
         regExpPattern: /\[(bi):([^\]]+)\]/g, // bolditalics
-        replacementTag: 'TextBI'
+        replacementTag: 'EPNSTextBI'
     },
     {
         regExpPattern: /\[(w):([^\]]+)\]/g, // url
-        replacementTag: 'TextW'
+        replacementTag: 'EPNSTextW'
     },
     {
         regExpPattern: /\[(wb):([^\]]+)\]/g, // url
-        replacementTag: 'TextWB'
+        replacementTag: 'EPNSTextWB'
     },
     {
         regExpPattern: /\[(mg):([^\]]+)\]/g, // url
-        replacementTag: 'TextMG'
+        replacementTag: 'EPNSTextMG'
     },
     {
         regExpPattern: /\[(dg):([^\]]+)\]/g, // url
-        replacementTag: 'TextDG'
+        replacementTag: 'EPNSTextDG'
     },
     {
         regExpPattern: /\[(ddg):([^\]]+)\]/g, // url
-        replacementTag: 'TextDDG'
+        replacementTag: 'EPNSTextDDG'
     },
 ]
 
@@ -78,3 +78,15 @@ export const V1_PATTERNS = [
 export const PATTERNS = [
    ...V1_PATTERNS
 ];
+
+/**
+ * !!Make sure this regex matches with the Tag names in the patterns' regexes
+ * For e.g. if we have <EPNSText>..</EPNSText> then the below should be EPNS,
+ * if we have <MDX>..</MDX> then below should be MDX.
+ */
+export const EPNSClosingTagWithSpaceRegexPATTERN = /<\/EPNS(.*?)>\s/mg;
+
+export const EPNSTimestampPATTERN = {
+    V1: /\[timestamp:(.*?)\]/mg,
+    V2: /<Timestamp>(.*?)<\/Timestamp>/mg,
+};
