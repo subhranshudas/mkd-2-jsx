@@ -14,7 +14,8 @@ export const transformWhiteSpace = (contentText: string) : string => {
     return contentText.replaceAll(' ', "&nbsp;"); // ??!! find better way???
 }
 
-export const transformPatternsToTags = (contentText: string) : string => {
+
+export const preProcessMarkdownText = (contentText: string) : string => {
     let transformedText = contentText;
 
     for (let i = 0; i < PATTERNS.length; i++) {
@@ -23,20 +24,4 @@ export const transformPatternsToTags = (contentText: string) : string => {
     }
 
     return transformedText;
-}
-
-
-/**
- * Add/Remove Processors here in the pipeline
- */
-const processors = [
-    transformPatternsToTags,
-    // transformNewLine,
-    // transformWhiteSpace
-];
-
-export const preProcessMarkdownText = (contentText: string) : string => {
-   return processors.reduce((transformedText, transformFunction) => {
-        return transformFunction(transformedText);
-   }, contentText)
 };

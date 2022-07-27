@@ -5,7 +5,7 @@
  * for e.g. 
  * [u:hello world] ==> <TextU>hello world</TextU> ==> overrides ==> markdown-to-jsx
  */
-const OLD_PATTERNS = [
+export const V1_PATTERNS = [
     {
         regExpPattern:   /\[(u):([^\]]+)\]/g, // url,
         replacementTag: 'TextU'
@@ -76,5 +76,5 @@ const OLD_PATTERNS = [
  * NEW EPNS TAGS PATTERNS
  */
 export const PATTERNS = [
-   ...OLD_PATTERNS
+   ...V1_PATTERNS
 ];
