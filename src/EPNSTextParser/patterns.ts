@@ -83,8 +83,10 @@ export const PATTERNS = [
  * !!Make sure this regex matches with the Tag names in the patterns' regexes
  * For e.g. if we have <EPNSText>..</EPNSText> then the below should be EPNS,
  * if we have <MDX>..</MDX> then below should be MDX.
+ * we are only allowing 
+ *  -- whitepace
  */
-export const EPNSClosingTagWithSpaceRegexPATTERN = /<\/EPNS(.*?)>\s/mg;
+export const EPNSClosingTagWithSpaceRegexPATTERN = /<\/EPNS(.*?)> /mg;
 
 export const EPNSTimestampPATTERN = {
     V1: /\[timestamp:(.*?)\]/mg,

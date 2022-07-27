@@ -38,7 +38,11 @@ export const preProcessMarkdownText = (contentText: string) : string => {
         transformedText = transformedText.replaceAll(regExpPattern, `<${replacementTag}>$2</${replacementTag}>`);
     }
 
-    transformedText = transformWhiteSpace(transformedText);
+    transformedText = transformNewLine(
+        transformWhiteSpace(
+            transformedText
+        )
+    );
 
     return transformedText;
 };
