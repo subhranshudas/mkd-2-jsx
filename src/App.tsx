@@ -129,6 +129,7 @@ function App() {
         <Column>
           <h3 className='standard'>NEW Epns standard</h3>
           <a className='link' href='https://www.markdownguide.org/basic-syntax/' target="_blank" rel="noreferrer">https://www.markdownguide.org/basic-syntax/</a>
+          <p>please also check in <a className='link' href='https://dillinger.io/'>https://dillinger.io/</a> if it works the same.</p>
           <div className='examples'>
             <p># Heading level 1</p>
             <p>## Heading level 2</p>
