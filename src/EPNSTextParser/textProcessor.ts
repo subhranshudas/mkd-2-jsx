@@ -1,4 +1,7 @@
-import { V1_PATTERNS, EPNSClosingTagWithSpaceRegexPATTERN } from './patterns';
+import {
+  V1_PATTERNS,
+  EPNSClosingTagWithSpaceRegexPATTERN,
+} from './patterns';
 
 /**
  * Returns a transformed text which is understood by the "markdown-to-jsx" lib
@@ -11,6 +14,23 @@ export const transformNewLine = (contentText: string) : string => {
 }
 
 /**
+ * This function creates a sequence of as many &nbsp; chars as space.
+ * TODO - if this creates an issue with word breaking 
+ * then simply add 1st char as &nbsp; and rest as whitespace and try.
+ * @param tagMatch 
+ * @returns 
+ */
+const getAsManyNBSPChars = (tagMatch: string) => {
+    let spacesFrag = tagMatch.slice(1, -1);
+    let spaces = '';
+
+    for (let j = 0; j < spacesFrag.length; j++) {
+        spaces += '&nbsp;'
+    }
+
+    return spaces;
+};
+/**
  * This function transforms the whitespace between 2 custom tags and inserts &nbsp;
  * For e.g. - 
  * - <EPNSText>Hello World</EPNSText><EPNSText>Hello World2</EPNSText> ==> no change
@@ -18,15 +38,20 @@ export const transformNewLine = (contentText: string) : string => {
  * @param contentText 
  * @returns 
  */
+
 export const transformTagWhiteSpace = (contentText: string) : string => {
     let transformedText = contentText;
-    
-    let tagMatches = EPNSClosingTagWithSpaceRegexPATTERN.exec(contentText);
 
+    let tagMatches = transformedText.match(EPNSClosingTagWithSpaceRegexPATTERN);
+  
     if (tagMatches) {
-        let tag = tagMatches[0]?.split(' ')?.join('');
-        return transformedText.replace(EPNSClosingTagWithSpaceRegexPATTERN, `${tag}&nbsp;`);
+        for (let i = 0; i < tagMatches.length; i++) {
+            let tagMatch = tagMatches[i];
+            const spaces = getAsManyNBSPChars(tagMatch);
+            transformedText = transformedText.replace(new RegExp(tagMatch, 'gim'), `>${spaces}<`)
+        }
     }
+
     return transformedText;
 }
 

@@ -81,6 +81,15 @@ const NotifView = styled.div`
   border-radius: 7px;
   padding: 7px;
   margin: 5px;
+  position: relative;
+
+  & .timestampLabel {
+    position: absolute;
+    top: 0;
+    right: -15%;
+    font-size: 12px;
+    color: #8db08d;
+  }
 `
 
 type OptionsType = {
@@ -93,6 +102,8 @@ const options : OptionsType[] = [
   { value: 42, label: 'ETH_KOVAN' },
 ];
 
+const copy = `<EPNSText color="orange">Hello World</EPNSText>   <EPNSText color="blue">Hello World</EPNSText>`;
+
 function App() {
   const [markdownText, setMarkDownText] = useState('');
   const [sourceText, setSourceText] = useState('');
@@ -101,7 +112,7 @@ function App() {
 
   const [address, setAddress] = useState('');
   const [selectedChain, setSelectedChain] = useState('42');
-  const [pageSize, setPageSize] = useState(50);
+  const [pageSize, setPageSize] = useState(1);
   const [notifs, setNotifs] = useState<EpnsAPI.ParsedResponseType[]>();
 
   const { timeStamp, notificationBody } = extractTimeStamp(sourceText);
@@ -118,7 +129,7 @@ function App() {
         const apiResponse = await EpnsAPI.fetchNotifications({
           chainId: parseInt(selectedChain, 10),
           user: address,
-          pageSize: 50
+          pageSize: pageSize
         });
         const parsedResults = EpnsAPI.parseApiResponse(apiResponse.results);
 
@@ -170,7 +181,7 @@ function App() {
               onChange={(e) => setMarkDownText(e.target.value)}>  
             </TextArea>
 
-            <ParseRenderer style={{  }}>
+            <ParseRenderer>
               <EPNSTextParser text={notificationBody} />
             </ParseRenderer>
             <p>TIMESTAMP: <b>{timeStamp}</b></p>
@@ -222,7 +233,7 @@ function App() {
                 if (e.target.value) {
                   setPageSize(parseInt(e.target.value, 10));
                 } else {
-                  setPageSize(50)
+                  setPageSize(1)
                 }
                 
               }}
@@ -240,9 +251,11 @@ function App() {
         <Column>
           {notifs && notifs.length > 0 ? (
             notifs?.map((notif, i) => {
+              const nData = extractTimeStamp(notif.message);
               return (
                 <NotifView key={i}>
-                  <EPNSTextParser text={extractTimeStamp(notif.message).notificationBody} />
+                  <EPNSTextParser text={nData.notificationBody} />
+                  <span className='timestampLabel'>{nData.timeStamp}</span>
                 </NotifView>
               );
             })

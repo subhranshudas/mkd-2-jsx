@@ -79,13 +79,12 @@ export const V1_PATTERNS = [
 
 
 /**
- * !!Make sure this regex matches with the Tag names in the patterns' regexes
- * For e.g. if we have <EPNSText>..</EPNSText> then the below should be EPNS,
- * if we have <MDX>..</MDX> then below should be MDX.
+ * For now not using the entire EPNS tag namespace just the >, < to figure out
+ *  </EPNSText> <EPNSText> --> 1 space => 1 &nbsp;
  * we are only allowing 
  *  -- whitepace
  */
-export const EPNSClosingTagWithSpaceRegexPATTERN = /<\/EPNS(.*?)>^\s+$<EPNS/mg;
+export const EPNSClosingTagWithSpaceRegexPATTERN = />[^\S\r\n]+</mg;
 
 export const EPNSTimestampPATTERN = {
     V1: /\[timestamp:(.*?)\]/mg,
