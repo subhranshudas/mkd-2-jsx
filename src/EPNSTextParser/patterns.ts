@@ -85,7 +85,7 @@ export const V1_PATTERNS = [
  * we are only allowing 
  *  -- whitepace
  */
-export const EPNSClosingTagWithSpaceRegexPATTERN = /<\/EPNS(.*?)> /mg;
+export const EPNSClosingTagWithSpaceRegexPATTERN = /<\/EPNS(.*?)>^\s+$<EPNS/mg;
 
 export const EPNSTimestampPATTERN = {
     V1: /\[timestamp:(.*?)\]/mg,
