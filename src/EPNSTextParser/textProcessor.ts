@@ -1,4 +1,4 @@
-import { PATTERNS, EPNSClosingTagWithSpaceRegexPATTERN } from './patterns';
+import { V1_PATTERNS, EPNSClosingTagWithSpaceRegexPATTERN } from './patterns';
 
 /**
  * Returns a transformed text which is understood by the "markdown-to-jsx" lib
@@ -18,7 +18,7 @@ export const transformNewLine = (contentText: string) : string => {
  * @param contentText 
  * @returns 
  */
-export const transformWhiteSpace = (contentText: string) : string => {
+export const transformTagWhiteSpace = (contentText: string) : string => {
     let transformedText = contentText;
     
     let tagMatches = EPNSClosingTagWithSpaceRegexPATTERN.exec(contentText);
@@ -27,20 +27,33 @@ export const transformWhiteSpace = (contentText: string) : string => {
         let tag = tagMatches[0]?.split(' ')?.join('');
         return transformedText.replace(EPNSClosingTagWithSpaceRegexPATTERN, `${tag}&nbsp;`);
     }
-    return contentText;
+    return transformedText;
+}
+
+/**
+ * This function transforms all the OLD tags to NEW standard tags
+ * @param contentText 
+ * @returns 
+ */
+export const transformV1Tags = (contentText: string) : string => {
+    let transformedText = contentText;
+    
+    for (let i = 0; i < V1_PATTERNS.length; i++) {
+        const { regExpPattern, replacementTag } = V1_PATTERNS[i];
+        transformedText = transformedText.replaceAll(regExpPattern, `<${replacementTag}>$2</${replacementTag}>`);
+    }
+   
+    return transformedText;
 }
 
 export const preProcessMarkdownText = (contentText: string) : string => {
     let transformedText = contentText;
 
-    for (let i = 0; i < PATTERNS.length; i++) {
-        const { regExpPattern, replacementTag } = PATTERNS[i];
-        transformedText = transformedText.replaceAll(regExpPattern, `<${replacementTag}>$2</${replacementTag}>`);
-    }
-
     transformedText = transformNewLine(
-        transformWhiteSpace(
-            transformedText
+        transformTagWhiteSpace(
+            transformV1Tags(
+                transformedText
+            )
         )
     );
 

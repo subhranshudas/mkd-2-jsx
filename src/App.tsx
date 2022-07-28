@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { EPNSTextParser } from './EPNSTextParser'
 import { extractTimeStamp } from './EPNSTextParser';
+import * as EpnsAPI from '@epnsproject/sdk-restapi';
 
 
 const StyledApp = styled.div`
@@ -41,6 +42,10 @@ const StyledApp = styled.div`
   & .instruction {
     text-align: center;
   }
+
+  & input.address {
+    width: 500px;
+  }
 `;
 
 const Group = styled.div`
@@ -70,14 +75,60 @@ const ParseRenderer = styled.div`
   color: black;
 `;
 
+const NotifView = styled.div`
+  width: 750px;
+  border: 1px solid green;
+  border-radius: 7px;
+  padding: 7px;
+  margin: 5px;
+`
+
+type OptionsType = {
+  label: string;
+  value: number;
+}
+
+const options : OptionsType[] = [
+  { value: 1, label: 'ETH_MAIN' },
+  { value: 42, label: 'ETH_KOVAN' },
+];
+
 function App() {
   const [markdownText, setMarkDownText] = useState('');
   const [sourceText, setSourceText] = useState('');
+  const [loading, setLoading] = useState(false);
+
+
+  const [address, setAddress] = useState('');
+  const [selectedChain, setSelectedChain] = useState('42');
+  const [pageSize, setPageSize] = useState(50);
+  const [notifs, setNotifs] = useState<EpnsAPI.ParsedResponseType[]>();
 
   const { timeStamp, notificationBody } = extractTimeStamp(sourceText);
 
   const convertMarkDown = () => {
     setSourceText(markdownText);
+  };
+
+  const fetchNotifications = async () => {
+    if (address) {
+    
+      try {
+        setLoading(true);
+        const apiResponse = await EpnsAPI.fetchNotifications({
+          chainId: parseInt(selectedChain, 10),
+          user: address,
+          pageSize: 50
+        });
+        const parsedResults = EpnsAPI.parseApiResponse(apiResponse.results);
+
+        setNotifs(parsedResults);
+      } catch (e) {
+        console.log('e: ', e);
+      } finally {
+        setLoading(false)
+      }
+    }
   };
 
   return (
@@ -144,6 +195,58 @@ function App() {
             <p>{`<EPNSText color="orange">Hello World</EPNSText>`}</p>
             <p>{`<Timestamp>3647484884</Timestamp>`}</p>
           </div>
+        </Column>
+      </Group>
+
+      <Group>
+        <Column>
+          <div>
+            <input className="address" value={address} onChange={(e) => { setAddress(e.target.value); }} placeholder="Enter adddress"/>
+
+
+            <select
+              onChange={(e) => {
+                setSelectedChain(e.target.value);
+              }}
+              defaultValue={selectedChain}
+            >
+              {options.map(({ label, value }) => {
+                return (
+                  <option key={`${label}_${value}`} value={value}>{label}</option>
+                );
+              })}
+            </select>
+
+            <input
+              onChange={(e) => {
+                if (e.target.value) {
+                  setPageSize(parseInt(e.target.value, 10));
+                } else {
+                  setPageSize(50)
+                }
+                
+              }}
+              value={pageSize}
+            />
+          </div>
+         
+          <p>E.g - 0xCdBE6D076e05c5875D90fa35cc85694E1EAFBBd1</p>
+          <button onClick={fetchNotifications} disabled={loading}>{loading ? 'fetching...' : 'fetch' } notifications</button>
+        </Column>        
+      </Group>
+
+
+      <Group>
+        <Column>
+          {notifs && notifs.length > 0 ? (
+            notifs?.map((notif, i) => {
+              return (
+                <NotifView key={i}>
+                  <EPNSTextParser text={extractTimeStamp(notif.message).notificationBody} />
+                </NotifView>
+              );
+            })
+          ) : null}
         </Column>
       </Group>
       

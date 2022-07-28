@@ -51,33 +51,32 @@ export const V1_PATTERNS = [
         replacementTag: 'EPNSTextBI'
     },
     {
-        regExpPattern: /\[(w):([^\]]+)\]/g, // url
+        regExpPattern: /\[(w):([^\]]+)\]/g, // white
         replacementTag: 'EPNSTextW'
     },
     {
-        regExpPattern: /\[(wb):([^\]]+)\]/g, // url
+        regExpPattern: /\[(wb):([^\]]+)\]/g, // white bold
         replacementTag: 'EPNSTextWB'
     },
     {
-        regExpPattern: /\[(mg):([^\]]+)\]/g, // url
+        regExpPattern: /\[(mg):([^\]]+)\]/g, // medium grey
         replacementTag: 'EPNSTextMG'
     },
     {
-        regExpPattern: /\[(dg):([^\]]+)\]/g, // url
+        regExpPattern: /\[(dg):([^\]]+)\]/g, // dark grey
         replacementTag: 'EPNSTextDG'
     },
     {
-        regExpPattern: /\[(ddg):([^\]]+)\]/g, // url
+        regExpPattern: /\[(ddg):([^\]]+)\]/g, // darker grey
         replacementTag: 'EPNSTextDDG'
     },
 ]
 
 /**
- * NEW EPNS TAGS PATTERNS
+ * NEW EPNS TAGS PATTERNS ??
  */
-export const PATTERNS = [
-   ...V1_PATTERNS
-];
+
+
 
 /**
  * !!Make sure this regex matches with the Tag names in the patterns' regexes
