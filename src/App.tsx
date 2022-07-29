@@ -102,7 +102,7 @@ const options : OptionsType[] = [
   { value: 42, label: 'ETH_KOVAN' },
 ];
 
-const copy = `<EPNSText color="orange">Hello World</EPNSText>   <EPNSText color="blue">Hello World</EPNSText>`;
+const copyTxt = `<EPNSText color="green" link="https://www.wikipedia.org/">Wikipedia</EPNSText>`;
 
 function App() {
   const [markdownText, setMarkDownText] = useState('');
@@ -112,7 +112,7 @@ function App() {
 
   const [address, setAddress] = useState('');
   const [selectedChain, setSelectedChain] = useState('42');
-  const [pageSize, setPageSize] = useState(1);
+  const [pageSize, setPageSize] = useState('');
   const [notifs, setNotifs] = useState<EpnsAPI.ParsedResponseType[]>();
 
   const { timeStamp, notificationBody } = extractTimeStamp(sourceText);
@@ -129,7 +129,7 @@ function App() {
         const apiResponse = await EpnsAPI.fetchNotifications({
           chainId: parseInt(selectedChain, 10),
           user: address,
-          pageSize: pageSize
+          pageSize: parseInt(pageSize, 10)
         });
         const parsedResults = EpnsAPI.parseApiResponse(apiResponse.results);
 
@@ -203,8 +203,9 @@ function App() {
             <p>Italicized text is the *cat's meow*.</p>
             <p>This text is bold italic ***really important***.</p>
             <p>My favorite search engine is [Duck Duck Go](https://duckduckgo.com).</p>
+            <p>{`<EPNSText color="green" link="https://www.wikipedia.org/">Wikipedia</EPNSText>`}</p>
             <p>{`<EPNSText color="orange">Hello World</EPNSText>`}</p>
-            <p>{`<Timestamp>3647484884</Timestamp>`}</p>
+            <p>{`<EPNSTimestamp>3647484884</EPNSTimestamp>`}</p>
           </div>
         </Column>
       </Group>
@@ -213,7 +214,6 @@ function App() {
         <Column>
           <div>
             <input className="address" value={address} onChange={(e) => { setAddress(e.target.value); }} placeholder="Enter adddress"/>
-
 
             <select
               onChange={(e) => {
@@ -230,12 +230,7 @@ function App() {
 
             <input
               onChange={(e) => {
-                if (e.target.value) {
-                  setPageSize(parseInt(e.target.value, 10));
-                } else {
-                  setPageSize(1)
-                }
-                
+                setPageSize(e.target.value);
               }}
               value={pageSize}
             />

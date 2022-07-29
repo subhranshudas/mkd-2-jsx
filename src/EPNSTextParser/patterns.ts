@@ -88,5 +88,5 @@ export const EPNSClosingTagWithSpaceRegexPATTERN = />[^\S\r\n]+</mg;
 
 export const EPNSTimestampPATTERN = {
     V1: /\[timestamp:(.*?)\]/mg,
-    V2: /<Timestamp>(.*?)<\/Timestamp>/mg,
+    V2: /<EPNSTimestamp>(.*?)<\/EPNSTimestamp>/mg,
 };
