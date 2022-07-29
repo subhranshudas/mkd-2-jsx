@@ -20,7 +20,7 @@ export const transformNewLine = (contentText: string) : string => {
  * @param tagMatch 
  * @returns 
  */
-const getAsManyNBSPChars = (tagMatch: string) => {
+const getSpacesBetweenTags = (tagMatch: string) => {
     let spacesFrag = tagMatch.slice(1, -1);
     let spaces = '';
 
@@ -47,7 +47,7 @@ export const transformTagWhiteSpace = (contentText: string) : string => {
     if (tagMatches) {
         for (let i = 0; i < tagMatches.length; i++) {
             let tagMatch = tagMatches[i];
-            const spaces = getAsManyNBSPChars(tagMatch);
+            const spaces = getSpacesBetweenTags(tagMatch);
             transformedText = transformedText.replace(new RegExp(tagMatch, 'gim'), `>${spaces}<`)
         }
     }
